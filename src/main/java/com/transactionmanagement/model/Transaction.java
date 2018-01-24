@@ -2,7 +2,12 @@ package com.transactionmanagement.model;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,10 +23,10 @@ public class Transaction implements Serializable {
 	@Id
 	private Long id;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Double amount;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String type;
 
 	@Column
@@ -58,6 +63,14 @@ public class Transaction implements Serializable {
 
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
+	}
+
+	public Boolean hasErrors() {
+		if (amount == null || StringUtils.isEmpty(type)) {
+			return Boolean.TRUE;
+		}
+
+		return Boolean.FALSE;
 	}
 
 }

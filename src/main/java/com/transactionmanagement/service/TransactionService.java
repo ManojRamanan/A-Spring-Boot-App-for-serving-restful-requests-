@@ -1,5 +1,6 @@
 package com.transactionmanagement.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -25,7 +26,6 @@ public class TransactionService implements ITransactionService {
 		try {
 			return transactionRepository.save(transaction);
 		} catch (Exception e) {
-			// incase of live system we will email the exceptions to rectify the issue
 			logger.warn("Exception in saveOrUpdateTransaction " + e.toString());
 		}
 		return null;
@@ -36,10 +36,9 @@ public class TransactionService implements ITransactionService {
 		try {
 			return transactionRepository.findByType(transactionType);
 		} catch (Exception e) {
-			// incase of live system we will email the exceptions to rectify the issue
 			logger.error("Exception in fetchTransactionsByType " + e.toString());
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override
