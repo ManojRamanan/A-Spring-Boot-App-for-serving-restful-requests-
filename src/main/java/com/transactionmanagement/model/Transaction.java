@@ -18,10 +18,10 @@ public class Transaction implements Serializable {
 	@Id
 	private Long id;
 
-	@Column
+	@Column(nullable=false)
 	private Double amount;
 
-	@Column
+	@Column(nullable=false)
 	private String type;
 
 	@Column

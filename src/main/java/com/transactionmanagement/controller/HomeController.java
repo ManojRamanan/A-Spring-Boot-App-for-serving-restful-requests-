@@ -4,12 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.transactionmanagement.enums.StatusEnum;
@@ -18,13 +24,14 @@ import com.transactionmanagement.service.ITransactionService;
 import com.transactionmanagement.webhelper.JsonResponse;
 
 /**
- * 
+ * Transaction Controller
  * @author manojramana
  *
  */
 @RestController
 @RequestMapping("/transactionservice/")
 public class HomeController {
+	
 
 	@Autowired
 	private ITransactionService transactionService;
@@ -60,13 +67,7 @@ public class HomeController {
 	private Object listTransactionsbyType(@PathVariable("type") String transactionType) {
 		List<Long> transactionIds = new ArrayList<>();
 		List<Transaction> transactions = transactionService.fetchTransactionsByType(transactionType);
-		transactions.forEach((e) -> transactionIds.add(e.getId()));
-		JsonResponse response = new JsonResponse();
-		if (transactions.isEmpty()) {
-			response.setStatusMessage("No Transactions found for the given type");
-			return response;
-		}
-		response.setResult(transactionIds);
+		transactions.forEach(e -> transactionIds.add(e.getId()));
 		return transactionIds;
 	}
 	
@@ -84,5 +85,19 @@ public class HomeController {
 		results.put("sum", sumOfTransactions);
 		return results;
 	}
+	
+	  /**
+     * Exception handler if NoSuchElementException is thrown in this Controller
+     *
+     * @param ex
+     * @return Error message String.
+     */
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NoSuchElementException.class)
+    public String return400(NoSuchElementException ex) {
+        return ex.getMessage();
+
+    }
+
 
 }
