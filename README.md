@@ -1,6 +1,6 @@
-# Transactionmanagement
-A Spring Boot Based App for Transaction management using restful services.it uses a in memory h2 database .
-It is a maven project based project.
+# Transaction Management
+A Spring Boot App for Transaction management using restful services.it uses an in memory h2 database .
+It is a maven  based project.
 
 Spring modules
 --------------
