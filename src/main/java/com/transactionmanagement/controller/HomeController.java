@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,7 +43,7 @@ public class HomeController {
 	 * @param transactionId
 	 * @return
 	 */
-	@RequestMapping(value = "/transaction/{transaction_id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/transaction/{transaction_id}", method = RequestMethod.PUT,produces=MediaType.APPLICATION_JSON_VALUE)
 	private JsonResponse saveOrUpdateTransaction(@RequestBody Transaction transaction,
 			@PathVariable("transaction_id") Long transactionId, BindingResult bindingResult) {
 		JsonResponse jsonResponse = new JsonResponse();
@@ -71,7 +72,7 @@ public class HomeController {
 	 * @param transactionType
 	 * @return
 	 */
-	@RequestMapping(value = "/types/{type}", method = RequestMethod.GET)
+	@RequestMapping(value = "/types/{type}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	private List<Long> listTransactionsbyType(@PathVariable("type") String transactionType) {
 		List<Long> transactionIds = new ArrayList<>();
 		List<Transaction> transactions = transactionService.fetchTransactionsByType(transactionType);
@@ -86,7 +87,7 @@ public class HomeController {
 	 * @param transactionId
 	 * @return
 	 */
-	@RequestMapping(value = "/sum/{transaction_id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/sum/{transaction_id}", method = RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	private Map<String, Double> calcSumOfTransactions(@PathVariable("transaction_id") Long transactionId) {
 		Double sumOfTransactions = transactionService.sumOfTransactions(transactionId);
 		Map<String, Double> results = new HashMap<>();
