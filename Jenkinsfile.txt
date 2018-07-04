@@ -1,3 +1,4 @@
 node {
-    checkout scm (1)
+    echo 'Hello from Pipeline'
 }
+
