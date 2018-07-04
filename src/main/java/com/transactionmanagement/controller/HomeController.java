@@ -61,7 +61,7 @@ public class HomeController {
 		} else {
 			jsonResponse.setStatus(StatusEnum.FAILURE.name());
 		}
-
+		System.out.println("test the jenkins build");
 		return jsonResponse;
 	}
 
