@@ -14,9 +14,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                   sh 'ln -s /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar /etc/init.d/jendep'
-
-                   sh 'sudo /etc/init.d/jendep start'
+                  script{
+                withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+                    sh "nohup java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar &"
+                }
+            }
             }
         }
     }
