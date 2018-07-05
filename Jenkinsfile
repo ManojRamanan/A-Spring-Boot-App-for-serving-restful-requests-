@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-              sh 'BUILD_ID=9081 java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar & exit'
+              sh 'nohup java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar'
             }
         }
     }
