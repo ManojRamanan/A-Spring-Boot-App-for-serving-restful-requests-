@@ -15,8 +15,7 @@ pipeline {
         stage('Deploy') {
             steps {
                   script{
-                    sh "ps | grep java | awk '{print \$1}' | xargs kill -9 || true"
-                    sh "JENKINS_NODE_COOKIE=dontkill nohup java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar &"
+                    sh "JENKINS_NODE_COOKIE=12345 nohup java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar &"
                 
             }
             }
