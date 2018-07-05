@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                   sh 'sudo ln -s /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar /etc/init.d/jendep'
+                   sh 'ln -s /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar /etc/init.d/jendep'
 
                    sh 'sudo /etc/init.d/jendep start'
             }
