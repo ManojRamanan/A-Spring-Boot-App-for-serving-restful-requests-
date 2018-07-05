@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-              sh 'nohup java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar && exit '
+              sh 'JENKINS_NODE_COOKIE=dontKillMe nohup java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar & exit '
             }
         }
     }
