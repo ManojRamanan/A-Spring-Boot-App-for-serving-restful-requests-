@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
+            args '-v /root/.m2:/root/.m2 -p 8090:8090 -v /var/run/docker.sock:/var/run/docker.sock -v ' 
         }
     }
     stages {
@@ -10,7 +10,11 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean package' 
                 sh 'mvn clean install'
-                sh 'mvn spring-boot:run'
+            }
+        }
+        stage('Deploy') {
+            steps {
+               sh 'mvn spring-boot:run'
             }
         }
     }
