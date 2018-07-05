@@ -14,9 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-               sh 'mvn spring-boot:run'
-               sh 'logout'
-                sh 'echo "app successfull" '
+               sh 'java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar'
             }
         }
     }
