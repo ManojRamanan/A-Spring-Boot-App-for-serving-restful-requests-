@@ -14,11 +14,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-              script{
-                withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
-                    sh 'nohup java -jar /var/jenkins_home/workspace/test/target/transactionmanagement-0.0.1-SNAPSHOT.jar &'
-                }
-            }
+            
+                    sh 'mvn spring-boot:run'
+                
+            
             }
         }
     }
