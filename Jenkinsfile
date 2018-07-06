@@ -15,7 +15,8 @@ pipeline {
         stage('Deploy') {
             steps {
                     sh 'ln -s /var/jenkins_home/workspace/test/target/transactionmanagement-0.0.1-SNAPSHOT.jar /etc/init.d/transaction'
-                    sh 'usermod -a -G sudo jenkins'
+                    sh 'RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers'
+                    sh 'RUN echo "alias docker=\'sudo docker \'" >> /home/jenkins/.bashrc'
                     sh 'sudo /etc/init.d/transaction start'
                 
             
