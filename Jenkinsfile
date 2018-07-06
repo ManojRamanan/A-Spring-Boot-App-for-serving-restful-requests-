@@ -14,10 +14,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                    sh 'ln -s /var/jenkins_home/workspace/test/target/transactionmanagement-0.0.1-SNAPSHOT.jar /etc/init.d/transaction'
-                    sh 'echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers'
-                    sh 'echo "alias docker=\'sudo docker \'" >> /var/jenkins_home/.bashrc'
-                    sh '/etc/init.d/transaction start'
+                    
+                    sh 'JENKINS_NODE_COOKIE=dontKillMe mvn spring-boot:run &'
                 
             
             }
