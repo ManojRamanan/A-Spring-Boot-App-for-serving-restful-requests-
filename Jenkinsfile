@@ -15,7 +15,7 @@ pipeline {
         stage('Deploy') {
             steps {
             
-                    sh 'mvn spring-boot:run &'
+                    sh 'java -jar /var/jenkins_home/workspace/test/target/transactionmanagement-0.0.1-SNAPSHOT.jar'
                 
             
             }
