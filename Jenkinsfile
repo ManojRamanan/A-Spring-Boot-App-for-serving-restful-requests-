@@ -14,8 +14,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-            	sh './mvnw install dockerfile:build'
-            	sh 'docker run -p 8030:8030 -t springio/gs-spring-boot-docker'
+ 			script{
+				 sh "java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar"
+                
+            }
         }
     }
 }
