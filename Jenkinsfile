@@ -15,7 +15,7 @@ pipeline {
         stage('Deploy') {
             steps {
  			script{
-				 sh "java -jar /var/jenkins_home/workspace/transactionmanagementapp/target/transactionmanagement-0.0.1-SNAPSHOT.jar"
+				 sh "java -jar  /var/jenkins_home/workspace/test/target/transactionmanagement-0.0.1-SNAPSHOT.jar"
                 
             }
         }
