@@ -1,10 +1,7 @@
-pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2 -dp 8030:8030 -v /var/run/docker.sock:/var/run/docker.sock ' 
-        }
-    }
+ pipeline {
+
+ 	agent any
+   
     stages {
         stage('Build') { 
             steps {
@@ -14,10 +11,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
- 			script{
-				 sh "java -jar  /var/jenkins_home/workspace/test/target/transactionmanagement-0.0.1-SNAPSHOT.jar"
-                
-            }
+            	sh './mvnw install dockerfile:build'
+            	sh '-p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock springio/gs-spring-boot-docker' 
         }
     }
 }
