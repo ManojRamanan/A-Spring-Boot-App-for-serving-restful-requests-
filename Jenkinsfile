@@ -14,8 +14,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-            
-                    sh 'java -jar /var/jenkins_home/workspace/test/target/transactionmanagement-0.0.1-SNAPSHOT.jar'
+                    sh 'sudo ln -s /var/jenkins_home/workspace/test/target/transactionmanagement-0.0.1-SNAPSHOT.jar /etc/init.d/transaction'
+                    sh 'jservice transaction start
                 
             
             }
