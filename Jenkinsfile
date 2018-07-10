@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'oracle/java:8' 
+            image 'openjdk/java:8' 
             args '-v /var/run/docker.sock:/var/run/docker.sock ' 
         }
     }
