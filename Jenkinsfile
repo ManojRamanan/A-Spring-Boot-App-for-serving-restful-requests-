@@ -14,8 +14,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-            	sh './mvnw clean install dockerfile:build'
-            	sh 'docker run -p 8030:8030 -t springio/gs-spring-boot-docker'
+            	sh './mvnw install dockerfile:build'
+            	sh 'docker run -v /root/.m2:/root/.m2 -p 8030:8030 -t springio/gs-spring-boot-docker'
         }
     }
 }
